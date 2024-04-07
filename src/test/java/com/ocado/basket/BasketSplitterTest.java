@@ -50,4 +50,30 @@ class BasketSplitterTest {
         // When/Then
         assertThrows(RuntimeException.class, () -> splitter.readBasket(nonExistentFilePath));
     }
+
+    @Test
+    void readProductDeliveryMethods() {
+        // Given
+        BasketSplitter splitter = new BasketSplitter("test_config.json");
+        Map<String, List<String>> expectedDeliveryMethods = Map.of(
+                "Product1", List.of("Method1", "Method2"),
+                "Product2", List.of("Method3", "Method4")
+        );
+
+        // When
+        Map<String, List<String>> actualDeliveryMethods = splitter.readProductDeliveryMethods("test_config.json");
+
+        // Then
+        assertEquals(expectedDeliveryMethods, actualDeliveryMethods);
+    }
+
+    @Test
+    void readProductDeliveryMethodsWillThrowWhenInputIsInvalid() {
+        // Given
+        BasketSplitter splitter = new BasketSplitter("test_config.json");
+        String nonExistentFilePath = "non_existent_file.json";
+
+        // When/Then
+        assertThrows(RuntimeException.class, () -> splitter.readProductDeliveryMethods(nonExistentFilePath));
+    }
 }
