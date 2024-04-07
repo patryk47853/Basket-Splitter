@@ -26,4 +26,28 @@ class BasketSplitterTest {
         assertEquals(List.of("Espresso Machine", "Garden Chair"), deliveryMap.get("Courier"));
         assertEquals(List.of("Steak (300g)", "Carrots (1kg)", "Cold Beer (330ml)", "AA Battery (4 Pcs.)"), deliveryMap.get("Express Delivery"));
     }
+
+    @Test
+    void readBasket() {
+        // Given
+        BasketSplitter splitter = new BasketSplitter("config.json");
+        String basketFilePath = "test_basket.json";
+        List<String> expectedBasketItems = List.of("Item1", "Item2", "Item3");
+
+        // When
+        List<String> actualBasketItems = splitter.readBasket(basketFilePath);
+
+        // Then
+        assertEquals(expectedBasketItems, actualBasketItems);
+    }
+
+    @Test
+    void readBasketWillThrowWhenInputIsInvalid() {
+        // Given
+        BasketSplitter splitter = new BasketSplitter("config.json");
+        String nonExistentFilePath = "non_existent_file.json";
+
+        // When/Then
+        assertThrows(RuntimeException.class, () -> splitter.readBasket(nonExistentFilePath));
+    }
 }
