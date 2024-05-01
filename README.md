@@ -1,5 +1,3 @@
-# Patryk Maliszewski, Java, Wrocław -> Recruitment task for Ocado Technology.
-
 # 🧺 BasketSplitter - Your Ultimate Shopping Companion
 
 * [📝 Description & Overview](#description)
